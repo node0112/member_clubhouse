@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Private Member's club</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/stylesheets/reset.css' />
+  </head>
+  <body class="flex">
+    <div class="header flex">
+      <div class="header-title"><a class="header-title" href="/">Member's Clubhouse</a></div>
+      <ul class="nav flex">
+        <% if (!user) {%>
+          <li class="nav-item"><a href="/login">Messageboard</a></li>
+        <% } %>
+        <% if (!user) {%>
+          <li class="nav-item"><a href="/login">Create Message</a></li>
+        <% } %>
+        <% if (user) {%>
+          <a href=messageboard >Messageboard</a>
+        <% } %>
+        <% if (user) {%>
+          <a href=/<%- user._id %>/message >Create Message</a>
+        <% } %>
+        <li class="nav-item"><div>
+          <div class="account">Account</div>
+          <div class="account-action flex">
+            <% if (!user) {%>
+              <a href="/signup">Sign up</a>
+              <a href="/login">Log in</a>
+            <% } %>
+            <% if (user) {%>
+              <a href="/logout">LOG OUT</a>
+            <% } %>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <% if (!user) {%>
+      <div class="body-text">To view messages <a href="/signup">Signup</a> or <a href="/login">Login</a> </div>
+    <% } %>
+    <% if (user) {%>
+      <div class="body-text">hello <%- user.username %>! To view messages click on messageboard or create one.</div>
+    <% } %>
+    </body>
+  <script>
+    let account = document.querySelector(".account")
+    account.addEventListener("mouseover" , ()=>{
+      document.querySelector(".account-action").style.display = "block"
+      document.querySelector(".account-action").style.opacity = "1"
+    })
+    account.addEventListener("mouseout" , ()=>{
+      document.querySelector(".account-action").style.opacity = "0"
+      document.querySelector(".account-action").style.display = "none"
+    })
+    let accAction = document.querySelector(".account-action")
+    accAction.addEventListener("mouseover" , ()=>{
+      document.querySelector(".account-action").style.display = "block"
+      document.querySelector(".account-action").style.opacity = "1"
+    })
+    accAction.addEventListener("mouseout" , ()=>{
+      document.querySelector(".account-action").style.opacity = "0"
+      document.querySelector(".account-action").style.display = "none"
+    })
+  </script>
+</html>
